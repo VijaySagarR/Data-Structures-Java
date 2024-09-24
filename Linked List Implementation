@@ -1,0 +1,31 @@
+package LinkedList;
+
+public class Main {
+    public static void main(String[] args) {
+      DLL dl=new DLL();
+      dl.createDLL(23);
+      dl.addFirst(34);
+      dl.addLast(56);
+      dl.insert(98,3);
+      dl.insert(11,2);
+      dl.printDll();
+
+        dl.deleteNode(7);
+    //  dl.deleteFirst();
+      //dl.deleteLast();
+      System.out.println("-----------------------------------------");
+     // dl.deleteLast();
+      //dl.deleteFirst();
+       dl.printDll();
+    //   dl.deleteFirst();
+        System.out.println("-----------------------------------------");
+        System.out.println(dl.head.value);
+        System.out.println(dl.tail.value);
+        System.out.println(dl.size);
+        dl.deleteLinkedList();
+      //  System.out.println(dl.head.value);
+        //System.out.println(dl.tail.value);
+        System.out.println(dl.size);
+        dl.printDll();
+    }
+}
