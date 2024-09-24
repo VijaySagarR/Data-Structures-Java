@@ -29,3 +29,214 @@ public class Main {
         dl.printDll();
     }
 }
+
+-----------------------------------
+
+package LinkedList;
+
+public class Node{
+    Node prev;
+    Node next;
+
+    public int value;
+
+}
+
+---------------------------------
+
+
+package LinkedList;
+
+public class DLL{
+    Node head;
+    Node tail;
+    int size;
+
+    public Node createDLL(int value){
+        //head=new Node();
+        Node newNode=new Node();
+        newNode.value=value;
+        newNode.next=null;
+        newNode.prev=null;
+
+        head=newNode;
+        tail=newNode;
+        size=1;
+        return head;
+    }
+
+
+
+    public void addFirst(int value){
+        if(head==null){
+            createDLL(value);
+        }
+        else{
+             Node newNode=new Node();
+             newNode.value=value;
+             head.prev=newNode;
+             newNode.next=head;
+             newNode.prev=null;
+             head=newNode;
+             size++;
+        }
+    }
+    public void addLast(int value){
+        if(head==null){
+            createDLL(value);
+        }
+        else{
+            Node newNode=new Node();
+            newNode.value=value;
+            newNode.prev=tail;
+            tail.next=newNode;
+            newNode.next=null;
+            tail=newNode;
+            size++;
+        }
+    }
+    public void printDll(){
+
+        if(head!=null) {
+            Node currNode = head;
+            while (currNode != null) {
+                System.out.println(currNode.value);
+                currNode = currNode.next;
+            }
+        }
+        else{
+            System.out.println("It's empty ");
+        }
+    }
+    public void insert(int value,int location){
+        if(location==0){
+            addFirst(value);
+        } else if (location>=size) {
+            addLast(value);
+        }
+        else{
+            Node currNode=new Node();
+            currNode.value=value;
+
+            Node temp=head;
+            int i=0;
+            while(i<location-1)
+            {
+                temp=temp.next;
+                i++;
+            }
+            currNode.next=temp.next;
+            currNode.prev=temp;
+            temp.next.prev=currNode;
+            temp.next=currNode;
+            size++;
+        }
+    }
+
+    public boolean search(int value){
+        if(head!=null) {
+            Node tempNode = head;
+            for (int i = 0; i < size; i++) {
+                if (value == tempNode.value) {
+                    System.out.println("Value " + value + " Exist at position " + i);
+                    return true;
+                }
+                else{
+                    tempNode=tempNode.next;
+                }
+            }
+            System.out.println("Value " + value + " Not found ");
+        }
+        else{
+            System.out.println("Linked List is Empty");
+        }
+        return false;
+    }
+    public void deleteFirst(){
+        if(head!=null){
+            if(head.next==null){
+                head=null;
+                tail=null;
+            }
+            else{
+                head=head.next;
+                head.prev=null;
+            }
+            size--;
+        }
+    }
+    public void deleteLast(){
+        if(head!=null){
+            if(tail.prev==null){
+                head=null;
+                tail=null;
+            }
+            else{
+                tail=tail.prev;
+                tail.next=null;
+            }
+            size--;
+        }
+    }
+
+    public void deleteNode(int loc){
+         if(head!=null){
+             if(loc==0){
+                 deleteFirst();
+             }
+             else if(loc>=size-1){
+                 deleteLast();
+             }
+             else{
+//(                 Node temp=head;
+//                 int i=0;
+//                 while(i<loc){
+//                     temp=temp.next;
+//                     i++;
+//                 }
+//                 Node next=temp.next;
+//                 Node prev=temp.prev;
+//                 prev.next=next;
+//                 next.prev=prev;
+//                 size--;)
+                 Node temp=head;
+                 int i=0;
+                 while(i<loc-1){
+                     temp=temp.next;
+                     i++;
+                 }
+                 temp.next=temp.next.next;
+                 temp.next.prev=temp;
+                 size--;
+
+             }
+
+         }
+    }
+    public void deleteLinkedList(){
+         Node temp=head;
+         for(int i=0;i<size;i++){
+             temp.prev=null;
+             temp=temp.next;
+         }
+//         while(temp.next!=null){
+//             temp.prev=null;
+//             temp=temp.next;
+//         }
+//         temp.prev=null;
+         head=null;
+         tail=null;
+         size=0;
+         System.out.println("Linked List Deleted Successfully  ");
+    }
+
+}
+
+
+
+
+
+
+
+
+
